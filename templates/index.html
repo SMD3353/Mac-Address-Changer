@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ restaurant.name }} | Interactive Ordering</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <h1>{{ restaurant.name }}</h1>
+        <p>{{ restaurant.description }}</p>
+        <div class="hero__details">
+          <span>{{ restaurant.address }}</span>
+          <span>{{ restaurant.phone }}</span>
+          <span>{{ restaurant.hours }}</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="menu" aria-labelledby="menu-title">
+        <h2 id="menu-title">Seasonal Menu</h2>
+        <div id="menu-container" class="menu__sections"></div>
+      </section>
+
+      <section class="assistant" aria-labelledby="assistant-title">
+        <h2 id="assistant-title">Order with Harmony</h2>
+        <div class="assistant__description">
+          <p>
+            Ask Harmony anything about the menu, build a full order, or use your voice
+            for a hands-free experience. Harmony will confirm your order and share a
+            summary that can be sent to the kitchen.
+          </p>
+        </div>
+        <div class="chat" aria-live="polite">
+          <div id="chat-log" class="chat__log"></div>
+          <form id="chat-form" class="chat__form" autocomplete="off">
+            <label class="sr-only" for="user-input">Type your message</label>
+            <input
+              id="user-input"
+              class="chat__input"
+              type="text"
+              name="message"
+              placeholder="Ask about today's specials or start an order..."
+              required
+            />
+            <button type="submit" class="button">Send</button>
+          </form>
+        </div>
+
+        <div class="voice">
+          <button id="voice-button" class="button button--secondary">
+            <span id="voice-label">Start voice order</span>
+          </button>
+          <audio id="voice-playback" class="voice__player" controls></audio>
+          <p class="voice__hint">
+            We process voice requests in real time with OpenAI. Grant microphone
+            access when prompted. Your audio never leaves the browser without your
+            explicit action.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; {{ restaurant.name }}. Crafted with care for every guest.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+  </body>
+</html>
